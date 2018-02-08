@@ -3,6 +3,7 @@ package com.project.cryptonews;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import com.project.cryptonews.pojo.coinmarket.Coin;
 import com.project.cryptonews.pojo.newsapi.Article;
 import com.project.cryptonews.service.CoinMarketService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -38,12 +40,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //recyclerView = findViewById(R.id.list_content);
-//        data = new ArrayList<>();
-//        adapter = new ListAdapter(this, data);
-//        layoutManager = new LinearLayoutManager(this);
-//        //recyclerView.setAdapter(adapter);
-        //recyclerView.setLayoutManager(layoutManager);
+        recyclerView = findViewById(R.id.list_content);
+        data = new ArrayList<>();
+        adapter = new ListAdapter(this, data);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(layoutManager);
         downloadData();
     }
 
@@ -51,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         Retrofit retrofit = new Retrofit.Builder().baseUrl(CoinMarketService.BASE_URL).
                 addConverterFactory(GsonConverterFactory.create()).build();
         CoinMarketService service = retrofit.create(CoinMarketService.class);
-        service.getCoins().enqueue(new Callback<Coin>() {
+        service.getBitCoinData().enqueue(new Callback<Coin>() {
             @Override
             public void onResponse(Call<Coin> call, Response<Coin> response) {
                 Coin coin = response.body();
