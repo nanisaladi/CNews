@@ -50,21 +50,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void downloadData() {
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(CoinMarketService.BASE_URL).
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(CoinMarketService.BASE_TICKER_URL).
                 addConverterFactory(GsonConverterFactory.create()).build();
         CoinMarketService service = retrofit.create(CoinMarketService.class);
-        service.getBitCoinData().enqueue(new Callback<Coin>() {
+        Log.d(MainActivity.class.getSimpleName(), "Getting data");
+        service.getCoinWithId("bitcoin").enqueue(new Callback<List<Coin>>() {
             @Override
-            public void onResponse(Call<Coin> call, Response<Coin> response) {
-                Coin coin = response.body();
+            public void onResponse(Call<List<Coin>> call, Response<List<Coin>> response) {
+                List<Coin> coin = response.body();
                 assert coin!=null;
-                Log.d(MainActivity.class.getSimpleName(), coin.getPriceUsd());
-                Log.d(MainActivity.class.getSimpleName(), coin.getPercentChange24h());
+                Log.d(MainActivity.class.getSimpleName(), coin.get(0).getPriceUsd());
+                Log.d(MainActivity.class.getSimpleName(), coin.get(0).getPercentChange24h());
             }
 
             @Override
-            public void onFailure(Call<Coin> call, Throwable t) {
+            public void onFailure(Call<List<Coin>> call, Throwable t) {
                 Log.d(MainActivity.class.getSimpleName(), "Failed");
+                Log.d(MainActivity.class.getSimpleName(), t.getMessage());
             }
         });
     }
