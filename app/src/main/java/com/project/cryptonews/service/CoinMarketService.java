@@ -13,8 +13,6 @@ import retrofit2.http.Path;
  */
 
 public interface CoinMarketService {
-    // https://api.coinmarketcap.com/v1/ticker/?start=100&limit=10
-    String BASE_TICKER_URL = "https://api.coinmarketcap.com/v1/ticker/";
 
     @GET("/bitcoin/")
     Call<Coin> getBitCoinData();

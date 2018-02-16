@@ -1,4 +1,4 @@
-package com.project.cryptonews;
+package com.project.cryptonews.ui;
 
 import android.support.v7.app.AppCompatActivity;
 

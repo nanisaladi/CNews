@@ -1,4 +1,4 @@
-package com.project.cryptonews;
+package com.project.cryptonews.ui;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,14 +11,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.project.cryptonews.R;
 import com.project.cryptonews.pojo.coinmarket.Coin;
 import com.project.cryptonews.pojo.newsapi.Article;
+import com.project.cryptonews.service.ApiConstants;
 import com.project.cryptonews.service.CoinMarketService;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,10 +39,13 @@ public class MainActivity extends AppCompatActivity {
     Map<String, String> maps = null;
     List<Article> data = null;
 
+    @Inject
+    CoinMarketService coinMarketService;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.list_content);
@@ -50,11 +58,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void downloadData() {
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(CoinMarketService.BASE_TICKER_URL).
-                addConverterFactory(GsonConverterFactory.create()).build();
-        CoinMarketService service = retrofit.create(CoinMarketService.class);
         Log.d(MainActivity.class.getSimpleName(), "Getting data");
-        service.getCoinWithId("bitcoin").enqueue(new Callback<List<Coin>>() {
+        coinMarketService.getCoinWithId("bitcoin").enqueue(new Callback<List<Coin>>() {
             @Override
             public void onResponse(Call<List<Coin>> call, Response<List<Coin>> response) {
                 List<Coin> coin = response.body();
