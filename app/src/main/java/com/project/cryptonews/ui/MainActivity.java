@@ -1,5 +1,7 @@
 package com.project.cryptonews.ui;
 
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +18,7 @@ import com.project.cryptonews.pojo.coinmarket.Coin;
 import com.project.cryptonews.pojo.newsapi.Article;
 import com.project.cryptonews.service.ApiConstants;
 import com.project.cryptonews.service.CoinMarketService;
+import com.project.cryptonews.ui.viewmodel.CoinDataViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +35,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
+
+    CoinDataViewModel coinDataViewModel;
 
     RecyclerView recyclerView = null;
     ListAdapter adapter = null;
@@ -39,14 +46,13 @@ public class MainActivity extends AppCompatActivity {
     Map<String, String> maps = null;
     List<Article> data = null;
 
-    @Inject
-    CoinMarketService coinMarketService;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
+
+        coinDataViewModel = ViewModelProviders.of(this, viewModelFactory)
+                .get(CoinDataViewModel.class);
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.list_content);
         data = new ArrayList<>();
@@ -59,20 +65,20 @@ public class MainActivity extends AppCompatActivity {
 
     private void downloadData() {
         Log.d(MainActivity.class.getSimpleName(), "Getting data");
-        coinMarketService.getCoinWithId("bitcoin").enqueue(new Callback<List<Coin>>() {
-            @Override
-            public void onResponse(Call<List<Coin>> call, Response<List<Coin>> response) {
-                List<Coin> coin = response.body();
-                assert coin!=null;
-                Log.d(MainActivity.class.getSimpleName(), coin.get(0).getPriceUsd());
-                Log.d(MainActivity.class.getSimpleName(), coin.get(0).getPercentChange24h());
-            }
 
-            @Override
-            public void onFailure(Call<List<Coin>> call, Throwable t) {
-                Log.d(MainActivity.class.getSimpleName(), "Failed");
-                Log.d(MainActivity.class.getSimpleName(), t.getMessage());
-            }
+        coinDataViewModel.getCoinData("bitcoin").observe(this, coin -> {
+            Log.d(MainActivity.class.getSimpleName(), coin.getPriceUsd());
+            Log.d(MainActivity.class.getSimpleName(), coin.getPercentChange24h());
+        });
+
+        coinDataViewModel.getCoinData("ethereum").observe(this, coin -> {
+            Log.d(MainActivity.class.getSimpleName(), coin.getPriceUsd());
+            Log.d(MainActivity.class.getSimpleName(), coin.getPercentChange24h());
+        });
+
+        coinDataViewModel.getCoinData("neo").observe(this, coin -> {
+            Log.d(MainActivity.class.getSimpleName(), coin.getPriceUsd());
+            Log.d(MainActivity.class.getSimpleName(), coin.getPercentChange24h());
         });
     }
 
@@ -80,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
         private List<Article> articles = null;
         Context context;
+
         ListAdapter(Context context, List<Article> data) {
             this.context = context;
             this.articles = data;

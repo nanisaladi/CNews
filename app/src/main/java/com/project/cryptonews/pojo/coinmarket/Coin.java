@@ -1,15 +1,21 @@
 package com.project.cryptonews.pojo.coinmarket;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Venkat on 03/02/18.
  */
-
+@Entity(tableName = "coins")
 public class Coin {
         @SerializedName("id")
         @Expose
+        @PrimaryKey
+        @NonNull
         private String id;
         @SerializedName("name")
         @Expose

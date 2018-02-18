@@ -1,5 +1,10 @@
 package com.project.cryptonews.di;
 
+import android.app.Application;
+import android.arch.persistence.room.Room;
+
+import com.project.cryptonews.data.CoinDao;
+import com.project.cryptonews.data.CoinDatabase;
 import com.project.cryptonews.service.ApiConstants;
 import com.project.cryptonews.service.CoinMarketService;
 
@@ -26,5 +31,18 @@ public class AppModule {
                 .build();
 
         return retrofit.create(CoinMarketService.class);
+    }
+
+    @Provides
+    @Singleton
+    CoinDatabase provideCoinDataBase(Application application) {
+        return Room.databaseBuilder(application, CoinDatabase.class,
+                "crypto.db").build();
+    }
+
+    @Provides
+    @Singleton
+    CoinDao provideCoinDao(CoinDatabase coinDatabase) {
+        return coinDatabase.coinDao();
     }
 }
