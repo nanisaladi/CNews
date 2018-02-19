@@ -1,4 +1,4 @@
-package com.project.cryptonews.pojo.coinmarket;
+package com.project.cryptonews.coins.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

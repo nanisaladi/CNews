@@ -1,6 +1,6 @@
 package com.project.cryptonews.service;
 
-import com.project.cryptonews.pojo.coinmarket.Coin;
+import com.project.cryptonews.coins.model.Coin;
 
 import java.util.List;
 

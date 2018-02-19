@@ -1,4 +1,4 @@
-package com.project.cryptonews;
+package com.project.cryptonews.coins;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,7 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.project.cryptonews.pojo.coinmarket.Coin;
+import com.project.cryptonews.R;
+import com.project.cryptonews.coins.model.Coin;
 import com.project.cryptonews.pojo.newsapi.Article;
 import com.project.cryptonews.service.CoinMarketService;
 
