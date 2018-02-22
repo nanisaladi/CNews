@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.WorkerThread;
+import android.util.Log;
 
 import java.util.Objects;
 
@@ -27,8 +28,10 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
         result.addSource(dbSource, resultType -> {
             result.removeSource(dbSource);
             if (shouldFetch(resultType)) {
+                Log.d(NetworkBoundResource.class.getSimpleName(), "About to fetch from NetworkBoundResource");
                 fetchFromNetwork(dbSource);
             } else {
+                Log.d(NetworkBoundResource.class.getSimpleName(), "Data already present");
                 result.addSource(dbSource, resultType1 -> setValue(Resource.success(resultType1)));
             }
         });

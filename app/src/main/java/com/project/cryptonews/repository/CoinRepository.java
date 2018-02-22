@@ -2,6 +2,8 @@ package com.project.cryptonews.repository;
 
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.project.cryptonews.data.CoinDao;
 import com.project.cryptonews.data.NetworkBoundResource;
@@ -9,6 +11,7 @@ import com.project.cryptonews.data.Resource;
 import com.project.cryptonews.pojo.coinmarket.Coin;
 import com.project.cryptonews.service.CoinMarketService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -55,7 +58,32 @@ public class CoinRepository {
         }.getAsLiveData();
     }
 
-    public LiveData<Coin> getCoinData(String id) {
-        return coinDao.getCoinData(id);
+    public LiveData<Resource<Coin>> getCoinData(String id) {
+
+        return new NetworkBoundResource<Coin, List<Coin>>() {
+
+            @Override
+            protected void saveCallResult(@NonNull List<Coin> body) {
+                Log.d(CoinRepository.class.getSimpleName(), "saving call result from coin repository: " + body);
+                coinDao.saveCoins(body);
+            }
+
+            @Override
+            protected Call<List<Coin>> createCall() {
+                Log.d(CoinRepository.class.getSimpleName(), "creating call from coin repository");
+                return coinMarketService.getCoinWithId(id);
+            }
+
+            @Override
+            protected boolean shouldFetch(Coin coins) {
+                return coins == null;
+            }
+
+            @Override
+            protected LiveData<Coin> loadFromDb() {
+                Log.d(CoinRepository.class.getSimpleName(), "loading data from dao in coin repository");
+                return coinDao.getCoinData(id);
+            }
+        }.getAsLiveData();
     }
 }

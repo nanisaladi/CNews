@@ -67,18 +67,24 @@ public class MainActivity extends AppCompatActivity {
         Log.d(MainActivity.class.getSimpleName(), "Getting data");
 
         coinDataViewModel.getCoinData("bitcoin").observe(this, coin -> {
-            Log.d(MainActivity.class.getSimpleName(), coin.getPriceUsd());
-            Log.d(MainActivity.class.getSimpleName(), coin.getPercentChange24h());
+            if (coin.data != null) {
+                Log.d(MainActivity.class.getSimpleName(), coin.data.getPriceUsd());
+                Log.d(MainActivity.class.getSimpleName(), coin.data.getPercentChange24h());
+            }
         });
 
         coinDataViewModel.getCoinData("ethereum").observe(this, coin -> {
-            Log.d(MainActivity.class.getSimpleName(), coin.getPriceUsd());
-            Log.d(MainActivity.class.getSimpleName(), coin.getPercentChange24h());
+            if (coin.data != null) {
+                Log.d(MainActivity.class.getSimpleName(), coin.data.getPriceUsd());
+                Log.d(MainActivity.class.getSimpleName(), coin.data.getPercentChange24h());
+            }
         });
 
         coinDataViewModel.getCoinData("neo").observe(this, coin -> {
-            Log.d(MainActivity.class.getSimpleName(), coin.getPriceUsd());
-            Log.d(MainActivity.class.getSimpleName(), coin.getPercentChange24h());
+            if (coin.data != null) {
+                Log.d(MainActivity.class.getSimpleName(), coin.data.getPriceUsd());
+                Log.d(MainActivity.class.getSimpleName(), coin.data.getPercentChange24h());
+            }
         });
     }
 

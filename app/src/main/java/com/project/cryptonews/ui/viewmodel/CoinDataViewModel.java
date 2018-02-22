@@ -3,6 +3,7 @@ package com.project.cryptonews.ui.viewmodel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
+import com.project.cryptonews.data.Resource;
 import com.project.cryptonews.pojo.coinmarket.Coin;
 import com.project.cryptonews.repository.CoinRepository;
 
@@ -18,9 +19,10 @@ public class CoinDataViewModel extends ViewModel {
     @Inject
     public CoinDataViewModel(CoinRepository coinRepository) {
         this.coinRepository = coinRepository;
+        coinRepository.loadCoins();
     }
 
-    public LiveData<Coin> getCoinData(String id) {
+    public LiveData<Resource<Coin>> getCoinData(String id) {
         return coinRepository.getCoinData(id);
     }
 }
