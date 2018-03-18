@@ -17,6 +17,8 @@ import com.project.cryptonews.R;
 
 public class CalculatorFragment extends Fragment {
 
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
