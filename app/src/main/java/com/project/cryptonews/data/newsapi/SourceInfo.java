@@ -1,4 +1,4 @@
-package com.project.cryptonews.pojo.newsapi;
+package com.project.cryptonews.data.newsapi;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

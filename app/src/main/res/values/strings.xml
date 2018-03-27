@@ -4,6 +4,9 @@
     <string name="API">31a3537d585c425bad6ff32b0854ca18</string>
     <string name="image_desc">image_description</string>
 
+
+    <string name="event_registry_API">2cbd8568-57ea-42d9-983b-1d1118d357bb</string>
+
     <string-array name="fiat_currencies">
         <item>AUD</item>
         <item>BRL</item>

@@ -1,6 +1,6 @@
-package com.project.cryptonews.service;
+package com.project.cryptonews.service.newsapi;
 
-import com.project.cryptonews.pojo.newsapi.DataResponse;
+import com.project.cryptonews.data.newsapi.DataResponse;
 
 import java.util.Map;
 

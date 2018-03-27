@@ -11,10 +11,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.project.cryptonews.R;
-import com.project.cryptonews.pojo.newsapi.Article;
+import com.project.cryptonews.data.newsapi.Article;
 import com.project.cryptonews.ui.viewmodel.CoinDataViewModel;
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ import javax.inject.Inject;
 import dagger.android.AndroidInjection;
 
 // FIXME: 18/03/18 This class should be deleted.
+@Deprecated
 public class MainActivity extends AppCompatActivity {
 
     @Inject
@@ -104,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
 //                    .fitCenter()
 //                    .diskCacheStrategy(DiskCacheStrategy.ALL);
 //            Glide.with(context).asBitmap().load(articles.get(position).getUrlToImage()).apply(ro).into(holder.image);
-            holder.desc.setText(articles.get(position).getDescription());
         }
 
         @Override
@@ -115,13 +116,13 @@ public class MainActivity extends AppCompatActivity {
 
     static class ItemHodler extends RecyclerView.ViewHolder {
         TextView title;
-        TextView desc;
+        ImageView desc;
 
 
         ItemHodler(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.titleView);
-            desc = itemView.findViewById(R.id.desc);
+            desc = itemView.findViewById(R.id.image);
         }
     }
 }

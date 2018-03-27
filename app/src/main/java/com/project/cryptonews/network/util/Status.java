@@ -1,4 +1,4 @@
-package com.project.cryptonews.data;
+package com.project.cryptonews.network.util;
 
 /**
  * Created by sakethramk on 2/18/18.

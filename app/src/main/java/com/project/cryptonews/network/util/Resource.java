@@ -1,4 +1,4 @@
-package com.project.cryptonews.data;
+package com.project.cryptonews.network.util;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;

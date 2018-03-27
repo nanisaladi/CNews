@@ -1,4 +1,4 @@
-package com.project.cryptonews.pojo.coinmarket;
+package com.project.cryptonews.data.coinmarket;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
@@ -8,7 +8,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by Venkat on 03/02/18.
+ * Store coin data
  */
 @Entity(tableName = "coins")
 public class Coin {

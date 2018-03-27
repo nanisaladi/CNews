@@ -1,12 +1,13 @@
-package com.project.cryptonews.data;
+package com.project.cryptonews.db;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;
 
-import com.project.cryptonews.pojo.coinmarket.Coin;
+import com.project.cryptonews.dao.CoinDao;
+import com.project.cryptonews.data.coinmarket.Coin;
 
 /**
- * Created by sakethramk on 2/18/18.
+ * Coins Data base.
  */
 @Database(entities = {Coin.class}, version = 1)
 public abstract class CoinDatabase extends RoomDatabase {

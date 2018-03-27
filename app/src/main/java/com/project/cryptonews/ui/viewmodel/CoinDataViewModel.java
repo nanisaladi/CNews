@@ -3,8 +3,8 @@ package com.project.cryptonews.ui.viewmodel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
-import com.project.cryptonews.data.Resource;
-import com.project.cryptonews.pojo.coinmarket.Coin;
+import com.project.cryptonews.network.util.Resource;
+import com.project.cryptonews.data.coinmarket.Coin;
 import com.project.cryptonews.repository.CoinRepository;
 
 import javax.inject.Inject;

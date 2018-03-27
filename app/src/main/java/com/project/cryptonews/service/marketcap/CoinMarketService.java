@@ -1,6 +1,6 @@
-package com.project.cryptonews.service;
+package com.project.cryptonews.service.marketcap;
 
-import com.project.cryptonews.pojo.coinmarket.Coin;
+import com.project.cryptonews.data.coinmarket.Coin;
 
 import java.util.List;
 
