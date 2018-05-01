@@ -14,10 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.project.cryptonews.R;
-import com.project.cryptonews.pojo.coinmarket.Coin;
 import com.project.cryptonews.pojo.newsapi.Article;
-import com.project.cryptonews.service.ApiConstants;
-import com.project.cryptonews.service.CoinMarketService;
 import com.project.cryptonews.ui.viewmodel.CoinDataViewModel;
 
 import java.util.ArrayList;
@@ -27,12 +24,8 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
+// FIXME: 18/03/18 This class should be deleted.
 public class MainActivity extends AppCompatActivity {
 
     @Inject

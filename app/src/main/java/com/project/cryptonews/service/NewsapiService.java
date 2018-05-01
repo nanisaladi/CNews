@@ -9,7 +9,7 @@ import retrofit2.http.GET;
 import retrofit2.http.QueryMap;
 
 /**
- * Created by Venkat on 16/12/17.
+ * News API service
  */
 
 public interface NewsapiService {
