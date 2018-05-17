@@ -1,7 +1,9 @@
 package com.project.cryptonews.data.eventregistry;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -14,6 +16,7 @@ public class Result {
     @PrimaryKey
     @SerializedName("id")
     @Expose
+    @NonNull
     private String id;
     @SerializedName("uri")
     @Expose
@@ -47,6 +50,7 @@ public class Result {
     private String body;
     @SerializedName("source")
     @Expose
+    @Ignore
     private Source source;
     @SerializedName("image")
     @Expose

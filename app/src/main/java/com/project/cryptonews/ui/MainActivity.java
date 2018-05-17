@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.project.cryptonews.R;
 import com.project.cryptonews.data.newsapi.Article;
-import com.project.cryptonews.ui.viewmodel.CoinDataViewModel;
+import com.project.cryptonews.ui.coins.viewmodel.CoinDataViewModel;
 
 import java.util.ArrayList;
 import java.util.List;

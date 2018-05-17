@@ -9,7 +9,7 @@ import com.project.cryptonews.data.coinmarket.Coin;
 /**
  * Coins Data base.
  */
-@Database(entities = {Coin.class}, version = 1)
+@Database(entities = {Coin.class}, version = 1, exportSchema = false)
 public abstract class CoinDatabase extends RoomDatabase {
     public abstract CoinDao coinDao();
 }

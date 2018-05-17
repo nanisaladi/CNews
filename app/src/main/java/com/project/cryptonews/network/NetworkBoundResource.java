@@ -17,9 +17,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * Created by sakethramk on 2/17/18.
+ * Network Bound Resource API to save data from remote to local DB.
  */
-
 public abstract class NetworkBoundResource<ResultType, RequestType> {
     private final MediatorLiveData<Resource<ResultType>> result = new MediatorLiveData<>();
 

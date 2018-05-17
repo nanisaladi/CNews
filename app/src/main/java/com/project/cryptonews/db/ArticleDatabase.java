@@ -7,9 +7,9 @@ import com.project.cryptonews.dao.ArticleDao;
 import com.project.cryptonews.data.eventregistry.Result;
 
 /**
- * New article data base to store article information.
+ * News article data base to store article information.
  */
-@Database(entities = {Result.class}, version = 1)
+@Database(entities = {Result.class}, version = 1, exportSchema = false)
 public abstract class ArticleDatabase extends RoomDatabase {
     public abstract ArticleDao articleDao();
 }

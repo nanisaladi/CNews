@@ -1,4 +1,4 @@
-package com.project.cryptonews.ui.viewmodel;
+package com.project.cryptonews.ui.coins.viewmodel;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;

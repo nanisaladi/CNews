@@ -9,6 +9,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.project.cryptonews.R;
+import com.project.cryptonews.ui.coins.view.CalculatorFragment;
+import com.project.cryptonews.ui.news.view.NewsFragment;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.project.cryptonews.ui;
+package com.project.cryptonews.ui.coins.view;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

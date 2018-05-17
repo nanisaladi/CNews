@@ -3,12 +3,16 @@ package com.project.cryptonews.di;
 import android.app.Application;
 import android.arch.persistence.room.Room;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.project.cryptonews.dao.ArticleDao;
 import com.project.cryptonews.dao.CoinDao;
 import com.project.cryptonews.db.ArticleDatabase;
 import com.project.cryptonews.db.CoinDatabase;
 import com.project.cryptonews.service.ApiConstants;
+import com.project.cryptonews.service.eventregistry.EventRegistryService;
 import com.project.cryptonews.service.marketcap.CoinMarketService;
+import com.project.cryptonews.ui.news.viewmodel.EventRegistryTypeAdapter;
 
 import javax.inject.Singleton;
 
@@ -24,6 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module(includes = ViewModelModule.class)
 public class AppModule {
 
+    //Provides CoinMarketCap retrofit object.
     @Provides
     @Singleton
     CoinMarketService provideCmsRetrofit() {
@@ -35,6 +40,35 @@ public class AppModule {
         return retrofit.create(CoinMarketService.class);
     }
 
+    //Provides Gson object
+    @Provides
+    @Singleton
+    Gson provideGson() {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        return gsonBuilder.create();
+    }
+
+    //Provides custom Gson provider for event registry service.
+    @Provides
+    @Singleton
+    Gson provideERGson() {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(EventRegistryTypeAdapter.class, new EventRegistryTypeAdapter());
+        return gsonBuilder.create();
+    }
+
+    //Provides Event Registry service retrofit object for network calls.
+    @Provides
+    @Singleton
+    EventRegistryService provideERserviceRetrofit(Gson gson) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(EventRegistryService.END_POINT)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        return retrofit.create(EventRegistryService.class);
+    }
+
+    //Provides Db to store coins data.
     @Provides
     @Singleton
     CoinDatabase provideCoinDataBase(Application application) {
@@ -65,6 +99,11 @@ public class AppModule {
         return articleDatabase.articleDao();
     }
 
+    /**
+     * Provides coin data access object.
+     * @param coinDatabase
+     * @return object.
+     */
     @Provides
     @Singleton
     CoinDao provideCoinDao(CoinDatabase coinDatabase) {
