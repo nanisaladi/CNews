@@ -8,14 +8,14 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
-import com.project.cryptonews.ui.CalculatorFragment;
-import com.project.cryptonews.ui.NewsFragment;
+import com.project.cryptonews.R;
 
 import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.AndroidInjection;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -25,6 +25,7 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_activity);
         ButterKnife.bind(this);
