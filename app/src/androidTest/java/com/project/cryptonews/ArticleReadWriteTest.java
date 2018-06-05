@@ -56,7 +56,7 @@ public class ArticleReadWriteTest {
         result.setImage("image");
 
         articleDao.insertAll(Arrays.asList(result));
-        List<Result> resultSet = articleDao.getArticles();
+        List<Result> resultSet = articleDao.getArticles().getValue();
         Assert.assertEquals(resultSet.get(0).getId(), "1");
     }
 }

@@ -1,5 +1,6 @@
 package com.project.cryptonews.ui.news.view;
 
+import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
@@ -23,9 +24,12 @@ import com.project.cryptonews.utils.logger.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import dagger.android.AndroidInjection;
 
 /**
  * News Fragment
@@ -39,6 +43,21 @@ public class NewsFragment extends Fragment {
     private Unbinder unbinder;
     ListAdapter adapter;
 
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
+
+    NewsListViewModel viewModel;
+
+    /**
+     * On create
+     * @param savedInstanceState
+     */
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        AndroidInjection.inject(this);
+    }
+
     /**
      * on create view call back
      */
@@ -48,7 +67,7 @@ public class NewsFragment extends Fragment {
         View view  = getLayoutInflater().inflate(R.layout.list_fragment, container, false);
         unbinder = ButterKnife.bind(this, view);
         data = new ArrayList<>();
-        adapter = new ListAdapter(getContext());
+        adapter = new ListAdapter(getContext().getApplicationContext());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         return view;
@@ -61,7 +80,8 @@ public class NewsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        NewsListViewModel viewModel = ViewModelProviders.of(this).get(NewsListViewModel.class);
+        viewModel = ViewModelProviders.of(this, viewModelFactory).
+                get(NewsListViewModel.class);
         subscribeUi(viewModel);
     }
 
@@ -139,7 +159,7 @@ public class NewsFragment extends Fragment {
      */
     private static class ListAdapter extends RecyclerView.Adapter<ListAdapter.ItemHodler> {
 
-        private List<Result> articles = null;
+        private List<Result> articles = new ArrayList<>();
         Context context;
 
         ListAdapter(Context context) {

@@ -1,10 +1,8 @@
 package com.project.cryptonews.ui.news.viewmodel;
 
-import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MediatorLiveData;
-import android.support.annotation.NonNull;
+import android.arch.lifecycle.ViewModel;
 import android.util.Log;
 
 import com.project.cryptonews.data.eventregistry.Result;
@@ -16,11 +14,13 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+
 /**
  * News list view model to store or retrieve news data
  */
 
-public class NewsListViewModel extends AndroidViewModel {
+public class NewsListViewModel extends ViewModel {
 
     /**
      * sub-class to {@link LiveData} and observe and reacts to data streams coming from LiveData.
@@ -29,12 +29,10 @@ public class NewsListViewModel extends AndroidViewModel {
 
     /**
      * Constructs view model object
-     * @param application mandatory instance to be passed. This object gives life cycle behavior to ViewModel
      * @param repository Repository to get data from or store data to.
      */
-    public NewsListViewModel(@NonNull Application application,
-                             @NonNull EventRepository repository) {
-        super(application);
+    @Inject
+    public NewsListViewModel(EventRepository repository) {
         Logger.log(NewsListViewModel.class.getSimpleName(), "View Model Created");
         mObservableData = new MediatorLiveData<>();
         mObservableData.setValue(null);

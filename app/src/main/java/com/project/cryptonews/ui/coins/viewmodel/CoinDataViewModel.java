@@ -10,7 +10,7 @@ import com.project.cryptonews.repository.CoinRepository;
 import javax.inject.Inject;
 
 /**
- * Created by sakethramk on 2/18/18.
+ * View model to fetch coin data.
  */
 
 public class CoinDataViewModel extends ViewModel {

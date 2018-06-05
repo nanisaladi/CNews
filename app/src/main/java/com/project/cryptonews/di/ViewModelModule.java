@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProvider;
 
 import com.project.cryptonews.ui.coins.viewmodel.CoinDataViewModel;
 import com.project.cryptonews.ui.coins.viewmodel.CryptoViewModelFactory;
+import com.project.cryptonews.ui.news.viewmodel.NewsListViewModel;
 
 import dagger.Binds;
 import dagger.Module;
@@ -22,6 +23,10 @@ public abstract class ViewModelModule {
     abstract ViewModel bindsCoinDataViewModel(CoinDataViewModel coinDataViewModel);
 
     @Binds
-    abstract ViewModelProvider.Factory bindsViewModelFactory(
-            CryptoViewModelFactory viewModelFactory);
+    @IntoMap
+    @ViewModelKey(NewsListViewModel.class)
+    abstract ViewModel bindsNewsListViewModel(NewsListViewModel newsListViewModel);
+
+    @Binds
+    abstract ViewModelProvider.Factory bindsViewModelFactory(CryptoViewModelFactory viewModelFactory);
 }

@@ -40,13 +40,15 @@ public class AppModule {
         return retrofit.create(CoinMarketService.class);
     }
 
-    //Provides Gson object
-    @Provides
-    @Singleton
-    Gson provideGson() {
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        return gsonBuilder.create();
-    }
+
+
+//    Two Gson instances giving a compile time error = Gson is bound multiple times.
+//    @Provides
+//    @Singleton
+//    Gson provideGson() {
+//        GsonBuilder gsonBuilder = new GsonBuilder();
+//        return gsonBuilder.create();
+//    }
 
     //Provides custom Gson provider for event registry service.
     @Provides

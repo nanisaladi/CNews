@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         coinDataViewModel = ViewModelProviders.of(this, viewModelFactory)
                 .get(CoinDataViewModel.class);
-        setContentView(R.layout.activity_main);
+        //setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.list_content);
         data = new ArrayList<>();
         adapter = new ListAdapter(this, data);
