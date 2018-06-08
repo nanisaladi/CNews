@@ -1,8 +1,7 @@
 package com.project.cryptonews.service.eventregistry;
 
-import com.project.cryptonews.data.eventregistry.Result;
+import com.project.cryptonews.data.eventregistry.Articles;
 
-import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -26,5 +25,5 @@ public interface EventRegistryService {
     String END_POINT = "http://eventregistry.org/json/";
 
     @GET("article")
-    Call<List<Result>> getSearchData(@QueryMap(encoded = true) Map<String, String> query);
+    Call<Articles> getSearchData(@QueryMap(encoded = true) Map<String, String> query);
 }

@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.project.cryptonews.dao.ArticleDao;
+import com.project.cryptonews.data.eventregistry.Articles;
 import com.project.cryptonews.data.eventregistry.Result;
 import com.project.cryptonews.network.NetworkBoundResource;
 import com.project.cryptonews.network.util.Resource;
@@ -44,22 +45,22 @@ public class EventRepository {
 
     public LiveData<Resource<List<Result>>> getArticles(Map<String, String> query) {
 
-        LiveData<Resource<List<Result>>> data = new NetworkBoundResource<List<Result>, List<Result>>() {
+        LiveData<Resource<List<Result>>> data = new NetworkBoundResource<List<Result>, Articles>() {
             @Override
-            protected void saveCallResult(@NonNull List<Result> body) {
-                Log.i(EventRepository.class.getSimpleName(), "Results: "+body.size());
-                dao.insertAll(body);
+            protected void saveCallResult(@NonNull Articles body) {
+                Log.i(EventRepository.class.getSimpleName(), "Results: "+body.getResults());
+                dao.insertAll(body.getResults());
             }
 
             @NonNull
             @Override
-            protected Call<List<Result>> createCall() {
+            protected Call<Articles> createCall() {
                 return service.getSearchData(query);
             }
 
             @Override
             protected boolean shouldFetch(List<Result> results) {
-                return results == null;
+                return results == null || results.size() == 0;
             }
 
             @Override
