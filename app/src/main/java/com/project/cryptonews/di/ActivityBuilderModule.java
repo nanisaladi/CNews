@@ -1,6 +1,6 @@
 package com.project.cryptonews.di;
 
-import com.project.cryptonews.ui.MainActivity;
+import com.project.cryptonews.ui.HomeActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -11,5 +11,5 @@ import dagger.android.ContributesAndroidInjector;
 @Module
 public abstract class ActivityBuilderModule {
     @ContributesAndroidInjector
-    abstract MainActivity mainActivity();
+    abstract HomeActivity homeActivity();
 }
