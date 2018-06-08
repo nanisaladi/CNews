@@ -15,15 +15,21 @@ import com.project.cryptonews.ui.news.view.NewsFragment;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.AndroidInjection;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.support.HasSupportFragmentInjector;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements HasSupportFragmentInjector {
 
     @BindView(R.id.view_pager)
     ViewPager viewPager;
 
+    @Inject
+    DispatchingAndroidInjector<Fragment> dispatchingAndroidInjector;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,6 +40,10 @@ public class HomeActivity extends AppCompatActivity {
         viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
     }
 
+    @Override
+    public DispatchingAndroidInjector<Fragment> supportFragmentInjector() {
+        return dispatchingAndroidInjector;
+    }
 
     @Override
     protected void onDestroy() {

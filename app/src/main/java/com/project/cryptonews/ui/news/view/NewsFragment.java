@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,7 +30,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import dagger.android.AndroidInjection;
+import dagger.android.support.AndroidSupportInjection;
 
 /**
  * News Fragment
@@ -55,7 +56,7 @@ public class NewsFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AndroidInjection.inject(this);
+        AndroidSupportInjection.inject(this);
     }
 
     /**
@@ -64,7 +65,7 @@ public class NewsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view  = getLayoutInflater().inflate(R.layout.list_fragment, container, false);
+        View view  = inflater.inflate(R.layout.list_fragment, container, false);
         unbinder = ButterKnife.bind(this, view);
         data = new ArrayList<>();
         adapter = new ListAdapter(getContext().getApplicationContext());

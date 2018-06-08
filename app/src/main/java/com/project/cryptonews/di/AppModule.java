@@ -14,6 +14,9 @@ import com.project.cryptonews.service.eventregistry.EventRegistryService;
 import com.project.cryptonews.service.marketcap.CoinMarketService;
 import com.project.cryptonews.ui.news.viewmodel.EventRegistryTypeAdapter;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -68,6 +71,11 @@ public class AppModule {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
         return retrofit.create(EventRegistryService.class);
+    }
+
+    @Provides
+    Executor provideExecutor() {
+        return Executors.newSingleThreadExecutor();
     }
 
     //Provides Db to store coins data.
