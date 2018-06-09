@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.project.cryptonews.dao.ArticleDao;
-import com.project.cryptonews.data.eventregistry.Articles;
+import com.project.cryptonews.data.eventregistry.ERResponse;
 import com.project.cryptonews.data.eventregistry.Result;
 import com.project.cryptonews.network.NetworkBoundResource;
 import com.project.cryptonews.network.util.Resource;
@@ -45,16 +45,16 @@ public class EventRepository {
 
     public LiveData<Resource<List<Result>>> getArticles(Map<String, String> query) {
 
-        LiveData<Resource<List<Result>>> data = new NetworkBoundResource<List<Result>, Articles>() {
+        LiveData<Resource<List<Result>>> data = new NetworkBoundResource<List<Result>, ERResponse>() {
             @Override
-            protected void saveCallResult(@NonNull Articles body) {
-                Log.i(EventRepository.class.getSimpleName(), "Results: "+body.getResults());
-                dao.insertAll(body.getResults());
+            protected void saveCallResult(@NonNull ERResponse body) {
+                Log.i(EventRepository.class.getSimpleName(), "Results: "+body.getArticles().getResults().size());
+                dao.insertAll(body.getArticles().getResults());
             }
 
             @NonNull
             @Override
-            protected Call<Articles> createCall() {
+            protected Call<ERResponse> createCall() {
                 return service.getSearchData(query);
             }
 
@@ -65,6 +65,7 @@ public class EventRepository {
 
             @Override
             protected LiveData<List<Result>> loadFromDb() {
+                Logger.log(EventRepository.class.getSimpleName(), "Load from DB: "+dao.getArticles());
                 return dao.getArticles();
             }
         }.getAsLiveData();

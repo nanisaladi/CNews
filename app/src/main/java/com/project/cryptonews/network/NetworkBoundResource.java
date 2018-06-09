@@ -9,6 +9,7 @@ import android.support.annotation.WorkerThread;
 import android.util.Log;
 
 import com.project.cryptonews.network.util.Resource;
+import com.project.cryptonews.utils.logger.Logger;
 
 import java.util.Objects;
 
@@ -58,7 +59,7 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
 
     @MainThread
     protected void onFetchFailed() {
-
+        Logger.log(NetworkBoundResource.class.getSimpleName(), "Network call failed");
     }
 
     @MainThread

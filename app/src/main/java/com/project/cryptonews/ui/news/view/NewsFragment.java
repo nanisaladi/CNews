@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -40,7 +41,12 @@ public class NewsFragment extends Fragment {
 
     @BindView(R.id.list_content)
     RecyclerView recyclerView;
+
+    @BindView(R.id.progress_id)
+    ProgressBar progressBar;
+
     private List<Result> data = null;
+
     private Unbinder unbinder;
     ListAdapter adapter;
 
@@ -96,6 +102,7 @@ public class NewsFragment extends Fragment {
                 if(listResource != null) {
                     List<Result> results = listResource.data;
                     if(results!=null) {
+                        progressBar.setVisibility(View.GONE);
                         logInfo("Set new data of size [%s]", results.size());
                         adapter.setNewsData(results);
                     }

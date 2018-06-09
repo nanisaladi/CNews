@@ -12,7 +12,6 @@ import com.project.cryptonews.db.CoinDatabase;
 import com.project.cryptonews.service.ApiConstants;
 import com.project.cryptonews.service.eventregistry.EventRegistryService;
 import com.project.cryptonews.service.marketcap.CoinMarketService;
-import com.project.cryptonews.ui.news.viewmodel.EventRegistryTypeAdapter;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -58,7 +57,6 @@ public class AppModule {
     @Singleton
     Gson provideERGson() {
         GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(EventRegistryTypeAdapter.class, new EventRegistryTypeAdapter());
         return gsonBuilder.create();
     }
 
@@ -95,7 +93,7 @@ public class AppModule {
     @Singleton
     ArticleDatabase provideArticleDatabase(Application application) {
         return Room.databaseBuilder(application, ArticleDatabase.class,
-                "articles.db").build();
+                "articles.db").fallbackToDestructiveMigration().build();
     }
 
     /**

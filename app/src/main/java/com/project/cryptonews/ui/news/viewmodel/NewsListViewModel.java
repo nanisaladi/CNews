@@ -39,7 +39,7 @@ public class NewsListViewModel extends ViewModel {
         Log.i(NewsListViewModel.class.getSimpleName(), "Network Request");
         LiveData<Resource<List<Result>>> data = repository.getArticles(createMap());
         if(data!=null && data.getValue() != null) {
-            Log.i(NewsListViewModel.class.getSimpleName(), "Network Request: "+data.getValue().message);
+            Logger.log(NewsListViewModel.class.getSimpleName(), "Network Request: "+data.getValue());
             mObservableData.addSource(data, mObservableData::setValue);
         }
     }

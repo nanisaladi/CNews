@@ -20,9 +20,6 @@ public class Articles {
     @SerializedName("page")
     @Expose
     private Integer page;
-    @SerializedName("count")
-    @Expose
-    private Integer count;
     @SerializedName("pages")
     @Expose
     private Integer pages;
@@ -49,14 +46,6 @@ public class Articles {
 
     public void setPage(Integer page) {
         this.page = page;
-    }
-
-    public Integer getCount() {
-        return count;
-    }
-
-    public void setCount(Integer count) {
-        this.count = count;
     }
 
     public Integer getPages() {

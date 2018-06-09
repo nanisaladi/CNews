@@ -1,5 +1,7 @@
 package com.project.cryptonews.data.eventregistry;
 
+import android.arch.persistence.room.ColumnInfo;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -9,38 +11,40 @@ import com.google.gson.annotations.SerializedName;
 
 public class Source {
 
+        @ColumnInfo(name="source_uri")
+        @SerializedName("uri")
+        @Expose
+        private String uri;
+        @ColumnInfo(name="source_dataType")
+        @SerializedName("dataType")
+        @Expose
+        private String dataType;
+        @ColumnInfo(name="source_title")
+        @SerializedName("title")
+        @Expose
+        private String title;
 
-    @SerializedName("id")
-    @Expose
-    private String id;
-    @SerializedName("uri")
-    @Expose
-    private String uri;
-    @SerializedName("title")
-    @Expose
-    private String title;
+        public String getUri() {
+            return uri;
+        }
 
-    public String getId() {
-        return id;
-    }
+        public void setUri(String uri) {
+            this.uri = uri;
+        }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+        public String getDataType() {
+            return dataType;
+        }
 
-    public String getUri() {
-        return uri;
-    }
+        public void setDataType(String dataType) {
+            this.dataType = dataType;
+        }
 
-    public void setUri(String uri) {
-        this.uri = uri;
-    }
+        public String getTitle() {
+            return title;
+        }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
+        public void setTitle(String title) {
+            this.title = title;
+        }
 }

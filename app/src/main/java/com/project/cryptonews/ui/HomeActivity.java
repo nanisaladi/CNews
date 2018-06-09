@@ -75,5 +75,4 @@ public class HomeActivity extends AppCompatActivity implements HasSupportFragmen
             return mScreens.get(position).toString();
         }
     }
-
 }

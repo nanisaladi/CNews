@@ -1,9 +1,8 @@
 package com.project.cryptonews.data.eventregistry;
 
+import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
-import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -13,11 +12,10 @@ import com.google.gson.annotations.SerializedName;
  */
 @Entity(tableName = "articles")
 public class Result {
-    @PrimaryKey
-    @SerializedName("id")
-    @Expose
-    @NonNull
-    private String id;
+
+    @PrimaryKey(autoGenerate = true)
+    private int uid;
+
     @SerializedName("uri")
     @Expose
     private String uri;
@@ -36,6 +34,9 @@ public class Result {
     @SerializedName("dateTime")
     @Expose
     private String dateTime;
+    @SerializedName("dataType")
+    @Expose
+    private String dataType;
     @SerializedName("sim")
     @Expose
     private Double sim;
@@ -48,9 +49,9 @@ public class Result {
     @SerializedName("body")
     @Expose
     private String body;
+    @Embedded
     @SerializedName("source")
     @Expose
-    @Ignore
     private Source source;
     @SerializedName("image")
     @Expose
@@ -59,12 +60,12 @@ public class Result {
     @Expose
     private Integer wgt;
 
-    public String getId() {
-        return id;
+    public int getUid() {
+        return uid;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
     public String getUri() {
@@ -113,6 +114,14 @@ public class Result {
 
     public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
+    }
+
+    public String getDataType() {
+        return dataType;
+    }
+
+    public void setDataType(String dataType) {
+        this.dataType = dataType;
     }
 
     public Double getSim() {
@@ -170,5 +179,4 @@ public class Result {
     public void setWgt(Integer wgt) {
         this.wgt = wgt;
     }
-
 }
