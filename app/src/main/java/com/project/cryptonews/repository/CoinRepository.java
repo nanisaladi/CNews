@@ -2,16 +2,14 @@ package com.project.cryptonews.repository;
 
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.project.cryptonews.data.CoinDao;
-import com.project.cryptonews.data.NetworkBoundResource;
-import com.project.cryptonews.data.Resource;
-import com.project.cryptonews.pojo.coinmarket.Coin;
-import com.project.cryptonews.service.CoinMarketService;
+import com.project.cryptonews.dao.CoinDao;
+import com.project.cryptonews.network.NetworkBoundResource;
+import com.project.cryptonews.network.util.Resource;
+import com.project.cryptonews.data.coinmarket.Coin;
+import com.project.cryptonews.service.marketcap.CoinMarketService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;

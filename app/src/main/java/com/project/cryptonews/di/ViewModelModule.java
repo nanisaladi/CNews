@@ -3,15 +3,16 @@ package com.project.cryptonews.di;
 import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
 
-import com.project.cryptonews.ui.viewmodel.CoinDataViewModel;
-import com.project.cryptonews.ui.viewmodel.CryptoViewModelFactory;
+import com.project.cryptonews.ui.coins.viewmodel.CoinDataViewModel;
+import com.project.cryptonews.ui.coins.viewmodel.CryptoViewModelFactory;
+import com.project.cryptonews.ui.news.viewmodel.NewsListViewModel;
 
 import dagger.Binds;
 import dagger.Module;
 import dagger.multibindings.IntoMap;
 
 /**
- * Created by sakethramk on 2/15/18.
+ * View Model Module provider.
  */
 @Module
 public abstract class ViewModelModule {
@@ -22,6 +23,10 @@ public abstract class ViewModelModule {
     abstract ViewModel bindsCoinDataViewModel(CoinDataViewModel coinDataViewModel);
 
     @Binds
-    abstract ViewModelProvider.Factory bindsViewModelFactory(
-            CryptoViewModelFactory viewModelFactory);
+    @IntoMap
+    @ViewModelKey(NewsListViewModel.class)
+    abstract ViewModel bindsNewsListViewModel(NewsListViewModel newsListViewModel);
+
+    @Binds
+    abstract ViewModelProvider.Factory bindsViewModelFactory(CryptoViewModelFactory viewModelFactory);
 }

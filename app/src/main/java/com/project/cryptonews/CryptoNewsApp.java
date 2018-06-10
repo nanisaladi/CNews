@@ -12,7 +12,7 @@ import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
 
 /**
- * Created by sakethramk on 2/14/18.
+ * Application class
  */
 
 public class CryptoNewsApp extends Application implements HasActivityInjector {

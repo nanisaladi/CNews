@@ -9,19 +9,27 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.project.cryptonews.R;
+import com.project.cryptonews.ui.coins.view.CalculatorFragment;
+import com.project.cryptonews.ui.news.view.NewsFragment;
 
 import java.util.Arrays;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.AndroidInjection;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.support.HasSupportFragmentInjector;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements HasSupportFragmentInjector {
 
     @BindView(R.id.view_pager)
     ViewPager viewPager;
 
+    @Inject
+    DispatchingAndroidInjector<Fragment> dispatchingAndroidInjector;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,7 +40,10 @@ public class HomeActivity extends AppCompatActivity {
         viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
     }
 
-
+    @Override
+    public DispatchingAndroidInjector<Fragment> supportFragmentInjector() {
+        return dispatchingAndroidInjector;
+    }
 
     @Override
     protected void onDestroy() {
@@ -64,5 +75,4 @@ public class HomeActivity extends AppCompatActivity {
             return mScreens.get(position).toString();
         }
     }
-
 }
